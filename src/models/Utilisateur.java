@@ -1,19 +1,18 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Utilisateur {
     private int id;
     private String nom;
     private String prenom;
     private String email;
-    private List<Livre> historique;
+    private ArrayList<Livre> historique;
     private static int idCompteur = 0;
 
     // Constructeur
     public Utilisateur(String nom, String prenom, String email, ArrayList<Livre> historique) {
-        this.id = ++idCompteur; // Incrémente le compteur pour chaque nouvel utilisateur
+        this.id = ++idCompteur;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -37,7 +36,7 @@ public class Utilisateur {
         return email;
     }
 
-    public List<Livre> getHistorique() {
+    public ArrayList<Livre> getHistorique() {
         return historique;
     }
 
@@ -46,8 +45,8 @@ public class Utilisateur {
     }
 
     public void emprunterLivre(Livre livre) {
-        if (livre.isDisponible()) {
-            livre.setDisponible(false);
+        if (livre.estDisponible()) {
+            livre.marquerIndisponible();
             ajouterLivreHistorique(livre);
             System.out.println(prenom + " " + nom + " a emprunté le livre: " + livre.getTitre());
         } else {
@@ -57,7 +56,7 @@ public class Utilisateur {
 
     public void retournerLivre(Livre livre) {
         if (historique.contains(livre)) {
-            livre.setDisponible(true);
+            livre.marquerDisponible();
             historique.remove(livre);
             System.out.println(prenom + " " + nom + " a retourné le livre: " + livre.getTitre());
         } else {
@@ -65,14 +64,19 @@ public class Utilisateur {
         }
     }
 
-    public void afficherHistorique() {
-        System.out.println("Historique des livres empruntés par " + prenom + " " + nom + ":");
-        for (Livre livre : historique) {
-            System.out.println("- " + livre.getTitre());
-        }
-    }
     public static int nbrUtil(){
         return idCompteur;
+    }
+
+    public void afficherHistorique() {
+        System.out.println("Historique des livres empruntés par " + prenom + " " + nom + ":");
+        if (historique.isEmpty()) {
+            System.out.println("Aucun livre emprunté.");
+        } else {
+            for (Livre livre : historique) {
+                System.out.println("- " + livre.getTitre());
+            }
+        }
     }
     
 }
