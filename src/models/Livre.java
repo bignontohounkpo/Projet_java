@@ -30,7 +30,7 @@ public class Livre {
         this.estDisponible = true;
     }
 
-    public Object getTitre() {
+    public String getTitre() {
         return this.titre;
     }
 
@@ -43,6 +43,18 @@ public class Livre {
     }
     public int nbrLivre() {
         return count;
+    }
+
+    public String getGenre() {
+        return this.genre;
+    }
+
+    public int getAnnee() {
+        return this.annee;
+    }
+
+    public String getAuteur() {
+        return this.auteur;
     }
 
 }
