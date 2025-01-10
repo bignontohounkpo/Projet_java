@@ -87,6 +87,13 @@ public class Bibliotheque {
         String genre = scanner.nextLine();
         System.out.println("Entrez l'annee du livre: ");
         int annee = scanner.nextInt();
+
+        while (annee < 0 || annee > 2023) {
+            System.out.println("Année invalide");
+            System.out.println("Entrez l'annee du livre: ");
+            annee = scanner.nextInt();
+        }
+
         scanner.nextLine();
         Livre livre = new Livre(titre, auteur, annee, genre);
         this.livres.put(livre.getId(), livre);
@@ -386,6 +393,13 @@ public class Bibliotheque {
             if (reponse.toLowerCase().equals("o")) {
                 System.out.println("Donnez une note de 1 à 5 étoiles :");
                 int note = scanner.nextInt();
+
+                while (note < 0 || note > 5) {
+                    System.out.println("Note invalide");
+                    System.out.println("Donnez une note de 1 à 5 étoiles :");
+                    note = scanner.nextInt();
+                }
+
                 scanner.nextLine();
 
                 System.out.println("Laissez un commentaire :");
